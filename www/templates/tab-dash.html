@@ -1,0 +1,42 @@
+<ion-view view-title="Speedport">
+  <ion-content class="padding">
+    <div ng-if="!loggedIn">
+      <center class="padding">
+        <h4>Login</h4>
+        <ion-spinner></ion-spinner>
+      </center>
+    </div>
+    <div ng-if="devices">
+      <div class="">
+        <a ng-click="reboot()" ng-if="!rebooting" class="button button-block button-assertive">
+          Router neustarten
+        </a>
+        <a ng-click="reboot()" style="opacity: 0.3" ng-if="rebooting" class="button button-block button-assertive">
+          wird neugestartet...
+        </a>
+      </div>
+      <div class="list">
+        <div class="item item-toggle">
+          Allow CSGO Connection
+          <label class="toggle">
+             <input ng-click="toggleCSGO()" ng-model="csgo" type="checkbox">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+          </label>
+        </div>
+        </div>
+        <div class="list">
+        <div class="item item-button-right" ng-repeat="device in devices">
+          {{device.name}}
+           <button ng-click="unblock(device)" ng-if="device.blocked" class="button button-outline">
+              <i class="icon assertive ion-ios-close-outline"></i>
+          </button>
+           <button ng-click="block(device)"  ng-if="!device.blocked" class="button button-outline">
+              <i class="icon balanced ion-ios-checkmark-outline"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
